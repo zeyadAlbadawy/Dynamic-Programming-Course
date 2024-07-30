@@ -9,7 +9,6 @@ public:
                 dp[i][j] = triangle[i][j] + min(dp[i+1][j] , dp[i + 1][j + 1]);
             }
         }
-
         return dp[0][0];
     }
 };
