@@ -1,32 +1,36 @@
 class Solution {
 public:
+     int maxLength = INT_MIN;
+    string maxStr = \\;
     string longestPalindrome(string s) {
-        if(s.size() <= 1) return s;
-        string finalRes = "";
-        int leftPtr = 0, rightPtr = 0;
-
-        for(int i = 0; i < s.size(); i++) {
-            leftPtr = rightPtr = i;
-
-            // Odd Substring
-            while(leftPtr >= 0 && rightPtr < s.size() && s[leftPtr]== s[rightPtr]) {
-                if(rightPtr - leftPtr + 1 > finalRes.size()) 
-                   finalRes = s.substr(leftPtr, rightPtr - leftPtr + 1);
-                leftPtr--;
+        // Iterate All Over The String And get the max Length Of Odd Substrings
+        int rightPtr = 0, leftPtr = 0;
+        int tempLength = 0;
+        for(int i = 0; i < s.size(); i++ ) {
+            rightPtr = leftPtr = i;
+            tempLength = 0;
+            while (rightPtr < s.size() && leftPtr >= 0 && s[rightPtr] == s[leftPtr]) {
+                tempLength = rightPtr - leftPtr + 1;
+                if(tempLength > maxLength) {
+                    maxStr = s.substr(leftPtr , rightPtr - leftPtr + 1);
+                    maxLength = tempLength;
+                }
                 rightPtr++;
+                leftPtr--;
             }
-
-            // Even Substring
-            rightPtr = i + 1;
+            // Deal With Even Substring
             leftPtr = i;
-            while(leftPtr >= 0 && rightPtr < s.size() && s[leftPtr] == s[rightPtr]) {
-                if(rightPtr - leftPtr + 1 > finalRes.size()) 
-                   finalRes = s.substr(leftPtr, rightPtr - leftPtr + 1);
-                leftPtr--;
+            rightPtr = i + 1;
+            while (leftPtr >=0  && rightPtr < s.size() && s[leftPtr] == s[rightPtr]) {
+                tempLength = rightPtr - leftPtr + 1;
+                if(tempLength > maxLength) {
+                    maxStr = s.substr(leftPtr, rightPtr - leftPtr + 1);
+                    maxLength = tempLength;
+                }
                 rightPtr++;
+                leftPtr--;
             }
         }
-
-        return finalRes;
+        return maxStr;
     }
 };
