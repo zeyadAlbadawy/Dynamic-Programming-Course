@@ -5,7 +5,7 @@ public:
         unordered_map<char, int> mp;
         int maxLength = INT_MIN;
         int i = 0, j = 0;
-        while(i < s.size() && j < s.size()) {
+        while (j < s.size()) {
             if(mp.find(s[j]) != mp.end()) {
                 // It exists in the current window
                 int lastOcur = mp[s[j]];
