@@ -36,12 +36,10 @@ public:
            return \/\;
         
         path.clear();
-        for(int i = 0; i < stack.size(); i++) {
+        for(int i = 0; i < stack.size(); i++)
             path += stack[i] + '/';
-        }
         if(path.size() != 1)
            path.pop_back();
-        // path = '/' + path;
         return path;
     }
 };
